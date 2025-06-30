@@ -1,0 +1,87 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+const int TAM1 = 30;
+const int TAM2 = 20;
+const int TAM3 = 40;
+
+void leer(float sec1[TAM1], float sec2[TAM2], float sec3[TAM3]) {
+    cout << "Ingrese las notas de la sección 1 (30 alumnos):" << endl;
+    for (int i = 0; i < TAM1; ++i) {
+        cout << "Nota del alumno " << i + 1 << ": ";
+        cin >> sec1[i];
+    }
+
+    cout << "\nIngrese las notas de la sección 2 (20 alumnos):" << endl;
+    for (int i = 0; i < TAM2; ++i) {
+        cout << "Nota del alumno " << i + 1 << ": ";
+        cin >> sec2[i];
+    }
+
+    cout << "\nIngrese las notas de la sección 3 (40 alumnos):" << endl;
+    for (int i = 0; i < TAM3; ++i) {
+        cout << "Nota del alumno " << i + 1 << ": ";
+        cin >> sec3[i];
+    }
+}
+
+int rojos(float sec1[TAM1], float sec2[TAM2], float sec3[TAM3]) {
+    int contar = 0;
+    for (int i = 0; i < TAM1; ++i) if (sec1[i] < 4) ++contar;
+    for (int i = 0; i < TAM2; ++i) if (sec2[i] < 4) ++contar;
+    for (int i = 0; i < TAM3; ++i) if (sec3[i] < 4) ++contar;
+    return contar;
+}
+
+int azules(float sec1[TAM1], float sec2[TAM2], float sec3[TAM3]) {
+    int contar = 0;
+    for (int i = 0; i < TAM1; ++i) if (sec1[i] >= 4) ++contar;
+    for (int i = 0; i < TAM2; ++i) if (sec2[i] >= 4) ++contar;
+    for (int i = 0; i < TAM3; ++i) if (sec3[i] >= 4) ++contar;
+    return contar;
+}
+
+void bubbleSort(float arr[], int tamaño) {
+    for (int i = 0; i < tamaño - 1; ++i) {
+        for (int j = 0; j < tamaño - i - 1; ++j) {
+            if (arr[j] > arr[j + 1]) {
+                float temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+void listarNotas(float sec1[TAM1], float sec2[TAM2], float sec3[TAM3]) {
+    const int TOTAL = TAM1 + TAM2 + TAM3;
+    float todasLasNotas[TOTAL];
+    for (int i = 0; i < TAM1; ++i) todasLasNotas[i] = sec1[i];
+    for (int i = 0; i < TAM2; ++i) todasLasNotas[TAM1 + i] = sec2[i];
+    for (int i = 0; i < TAM3; ++i) todasLasNotas[TAM1 + TAM2 + i] = sec3[i];
+    bubbleSort(todasLasNotas, TOTAL);
+    cout << "\nNotas ordenadas:" << endl;
+    for (int i = 0; i < TOTAL; ++i) {
+        cout << todasLasNotas[i] << " ";
+    }
+    cout << endl;
+}
+
+void ocurrencias(float sec1[TAM1], float sec2[TAM2], float sec3[TAM3]) {
+    const int TOTAL = TAM1 + TAM2 + TAM3;
+    float todasLasNotas[TOTAL];
+    int repeticiones = 1;
+    for (int i = 0; i < TAM1; ++i) todasLasNotas[i] = sec1[i];
+    for (int i = 0; i < TAM2; ++i) todasLasNotas[TAM1 + i] = sec2[i];
+    for (int i = 0; i < TAM3; ++i) todasLasNotas[TAM1 + TAM2 + i] = sec3[i];
+    bubbleSort(todasLasNotas, TOTAL);
+    for (int i = 0; i < TOTAL; i++) {
+        if (i < TOTAL - 1 && todasLasNotas[i] == todasLasNotas[i + 1]) {
+            repeticiones++;
+        } else {
+            cout << "Las ocurrencias para " << todasLasNotas[i] << " es " << repeticiones << " veces" << endl;
+            repeticiones = 1;
+        }
+    }
+}
