@@ -1,0 +1,38 @@
+#include <iostream>
+using namespace std;
+
+void estadisticas(float sol1[18], float sol2[18], float pcl[18]) {
+    int eximidos = 0;
+    int reprobados = 0;
+    int examen = 0;
+    int sobresalientes = 0;
+
+    for (int i = 0; i < 18; ++i) {
+        float NP = sol1[i] * 0.35 + sol2[i] * 0.35 + pcl[i] * 0.3;
+
+        if (NP >= 6.8) {
+            sobresalientes++;
+        }
+        if (NP >= 5.0) {
+            eximidos++;
+        } else if (NP < 3.5) {
+            reprobados++;
+        } else {
+            examen++;
+        }
+    }
+
+    cout << "Cantidad de alumnos que se eximen pues su NP >= 5,0: " << eximidos << endl;
+    cout << "Cantidad de alumnos que reprueban pues su NP < 3,5: " << reprobados << endl;
+    cout << "Cantidad de alumnos que deben dar examen pues su NP está entre 3,5 y 4,9: " << examen << endl;
+    cout << "Cantidad de alumnos sobresalientes pues su NP >= 6,8: " << sobresalientes << endl;
+}
+
+int main() {
+    float sol1[18] = {6.0, 3.0, 7.0, 5.0, 6.0, 7.0, 7.0, 2.0, 7.0, 7.0, 1.0, 6.0, 6.0, 4.0, 5.0, 2.0, 7.0, 3.0};
+    float sol2[18] = {6.0, 4.0, 2.0, 4.0, 7.0, 1.0, 7.0, 1.0, 6.0, 6.0, 7.0, 5.0, 2.0, 4.0, 3.0, 5.0, 1.0, 7.0};
+    float pcl[18]  = {3.0, 2.0, 5.0, 7.0, 7.0, 3.0, 7.0, 3.0, 2.0, 3.0, 4.0, 6.0, 1.0, 3.0, 3.0, 1.0, 4.0, 1.0};
+
+    estadisticas(sol1, sol2, pcl);
+    return 0;
+}
