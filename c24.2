@@ -1,0 +1,10 @@
+#include <iostream>
+using namespace std;
+
+void pagar(int pago, int& pago5000, int& pago500, int& pagoResto) {
+    pago5000 = pago / 5000;
+    pago %= 5000; // Actualizar el pago restante después de extraer billetes de 5000
+
+    pago500 = pago / 500;
+    pagoResto = pago % 500; // El resto es lo que queda después de extraer monedas de 500
+}
